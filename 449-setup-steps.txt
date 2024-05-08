@@ -142,7 +142,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 624482486,
 	"title": "MongoDB + Flask setup",
-	"description": "Set up MongoDB connection and queries using Flask and PyMongo"
+	"description": "Set up MongoDB connection and queries using Flask and PyMongo",
 	"due_date": Date()
 },
 {
@@ -150,7 +150,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 914581322,
 	"title": "Implement user authentication",
-	"description": "Implement user auth using JWTs via the pyjwt Python library"
+	"description": "Implement user auth using JWTs via the pyjwt Python library",
 	"due_date": Date()
 },
 {
@@ -158,7 +158,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 914581322,
 	"title": "Implement encrypted password storage",
-	"description": "Implement encrypted password storage using the bcrypt Python library"
+	"description": "Implement encrypted password storage using the bcrypt Python library",
 	"due_date": Date()
 },
 {
@@ -166,7 +166,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 624482486,
 	"title": "Integrate caching mechanism",
-	"description": "Integrate caching using Redis"
+	"description": "Integrate caching using Redis",
 	"due_date": Date()
 },
 {
@@ -174,7 +174,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 624482486,
 	"title": "MongoDB Replication",
-	"description": "Integrate DB replication using MongoDB Replica Set"
+	"description": "Integrate DB replication using MongoDB Replica Set",
 	"due_date": Date()
 },
 {
@@ -182,7 +182,7 @@ db.tasks.insertMany([
 	"project_ID": 39,
 	"employee_ID": 624482486,
 	"title": "Test Flask queries",
-	"description": "Outline and test use cases for MongoDB + Flask routes"
+	"description": "Outline and test use cases for MongoDB + Flask routes",
 	"due_date": Date()
 },
 
@@ -191,7 +191,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 914581322,
 	"title": "Plan Browser UI",
-	"description": "Brainstorm UI for Browser clients"
+	"description": "Brainstorm UI for Browser clients",
 	"due_date": Date()
 },
 {
@@ -199,7 +199,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 914581322,
 	"title": "Plan Browser UX and navigation",
-	"description": "Brainstorm UX and navigation for Browser clients"
+	"description": "Brainstorm UX and navigation for Browser clients",
 	"due_date": Date()
 },
 {
@@ -207,7 +207,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 914581322,
 	"title": "Plan Backend APIs",
-	"description": "Brainstorm architecture for API endpoints and usage"
+	"description": "Brainstorm architecture for API endpoints and usage",
 	"due_date": Date()
 },
 {
@@ -215,7 +215,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 244071247,
 	"title": "Plan Mobile UI",
-	"description": "Brainstorm UI for Mobile clients"
+	"description": "Brainstorm UI for Mobile clients",
 	"due_date": Date()
 },
 {
@@ -223,7 +223,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 244071247,
 	"title": "Plan Mobile UX and navigation",
-	"description": "Brainstorm UX and navigation for Mobile clients"
+	"description": "Brainstorm UX and navigation for Mobile clients",
 	"due_date": Date()
 },
 {
@@ -231,7 +231,7 @@ db.tasks.insertMany([
 	"project_ID": 57,
 	"employee_ID": 244071247,
 	"title": "Plan Database Storage",
-	"description": "Brainstorm architecture for Database schemas, storage, and accessibility"
+	"description": "Brainstorm architecture for Database schemas, storage, and accessibility",
 	"due_date": Date()
 },
 
@@ -240,7 +240,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 244071247,
 	"title": "Android UI and UX",
-	"description": "Brainstorm UI and UX for Android users. Research what development tools to use."
+	"description": "Brainstorm UI and UX for Android users. Research what development tools to use.",
 	"due_date": Date()
 },
 {
@@ -248,7 +248,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 244071247,
 	"title": "iOS UI and UX",
-	"description": "Brainstorm UI and UX for iOS users. Research what development tools to use."
+	"description": "Brainstorm UI and UX for iOS users. Research what development tools to use.",
 	"due_date": Date()
 },
 {
@@ -256,7 +256,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 693912036,
 	"title": "Research Languages",
-	"description": "Conduct research for the most popular/in-demand languages to incorporate in the app."
+	"description": "Conduct research for the most popular/in-demand languages to incorporate in the app.",
 	"due_date": Date()
 },
 {
@@ -264,7 +264,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 693912036,
 	"title": "Research Language Training Models",
-	"description": "Conduct research for the most effective applications of AI/ML for learning languages."
+	"description": "Conduct research for the most effective applications of AI/ML for learning languages.",
 	"due_date": Date()
 },
 {
@@ -272,7 +272,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 693912036,
 	"title": "Plan Database Storage",
-	"description": "Brainstorm architecture for Database schemas, storage, and accessibility"
+	"description": "Brainstorm architecture for Database schemas, storage, and accessibility",
 	"due_date": Date()
 },
 {
@@ -280,7 +280,7 @@ db.tasks.insertMany([
 	"project_ID": 67,
 	"employee_ID": 693912036,
 	"title": "Plan Test Cases for Language Learning",
-	"description": "Plan test cases for evaluating the accuracy of different language models. Keep the mobile UI/UX in mind."
+	"description": "Plan test cases for evaluating the accuracy of different language models. Keep the mobile UI/UX in mind.",
 	"due_date": Date()
 }
 ])
