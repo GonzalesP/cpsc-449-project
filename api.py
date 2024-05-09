@@ -2,22 +2,30 @@ from flask import Flask, jsonify, request  # Flask app methods
 from pymongo import MongoClient  # MongoDB Atlas connection
 from pymongo.server_api import ServerApi  # MongoDB Atlas connection
 from bson.objectid import ObjectId  # Creating/processing ObjectIDs
+import redis  # Redis cache
+import json  # Stringify JSONs for Redis cache
 
-uri = "insert_your_uri_here"
+# Replace this with your URI from MongoDB Atlas!
+uri = "insert_URI_here"
 app = Flask(__name__)
 
-# Connect to MongoDB and create collections
+# Connect to MongoDB
 client = MongoClient(uri, server_api=ServerApi('1'))
-db = client['project-manager']  # use project-manager database
+# Use project-manager database
+db = client['project-manager']
+# Create collections
 employees_collection = db['employees']
 projects_collection = db['projects']
 tasks_collection = db['tasks']
 
-# test your connection to MongoDB
+# Create Redis cache
+redis_cache = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+
+# Test your connection to MongoDB
 @app.route('/v1/project-manager/test', methods=['GET'])
 def check_dbs():
 	print(client.list_database_names())
-	return jsonify({'message': 'hi'}), 201
+	return jsonify({'message': 'hi'}), 200
 
 
 
@@ -28,10 +36,53 @@ def check_dbs():
 # get list of all employees
 @app.route('/v1/project-manager/employees', methods=['GET'])
 def get_employees():
-	employees = list(employees_collection.find())
-	for employee in employees:
-		employee['_id'] = str(employee['_id'])
-	return jsonify(employees), 200
+	# attempt to load all employee IDs from Redis cache
+	employee_ids = redis_cache.smembers("employee_ids")
+
+	# Cache hit, load each employee's details from hash map
+	if employee_ids:
+		# list of employee documents to return
+		employees = []
+		# for each employee in the Redis cache, parse their data
+		for emp_id in employee_ids:
+			# get employee's data
+			emp_data = redis_cache.hgetall(f'employee:{emp_id}')
+			# parse lists (saved as strings in Redis, but should be JSON when returned)
+			emp_data['skills'] = json.loads(emp_data['skills'])
+			emp_data['projects'] = json.loads(emp_data['projects'])
+			# save the document in list of employees
+			employees.append(emp_data)
+		
+		# print("from the cache!")
+		return jsonify(employees), 200  # return all employees (from cache)
+
+	# Cache miss, query the MongoDB database
+	documents = list(employees_collection.find())
+	# list of employee documents to return
+	employees = []
+	for document in documents:
+		# make each document JSON serializable (stringify objects/lists)
+		document['_id'] = str(document['_id'])
+		document['skills'] = json.dumps(document['skills'])
+		document['projects'] = json.dumps(document['projects'])
+		# save each employee ID
+		emp_id = document['employee_ID']
+		# cache each employee in a hash map and store their IDs in a set
+		# first, stringify lists for redis cache
+		redis_cache.hset(f"employee:{emp_id}", mapping=document)
+		redis_cache.sadd("employee_ids", emp_id)
+
+		# then, revert the document's lists to JSON (to return to user)
+		# note: Redis needs to save lists as strings, but user should get lists as JSON
+		document['skills'] = json.loads(document['skills'])
+		document['projects'] = json.loads(document['projects'])
+
+		# finally, save each employee document
+		employees.append(document)
+		
+	# return all employees
+	# print("from the database!")
+	return jsonify(employees), 200  # return all employees (from MongoDB Atlas)
 
 # get an employee by their employee ID
 @app.route('/v1/project-manager/employees/<int:emp_id>')
