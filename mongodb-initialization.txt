@@ -1,0 +1,279 @@
+Initialize the MongoDB by running these commands in mongosh:
+
+use company-manager
+
+db.projects.insertMany([
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"name": "Scalable Backend System with Secure Authentication",
+	"description": "Build a backend system with secure user authentication, encrypted password storage, caching, and database replication.",
+	"employees": [
+		391888555, 363090781, 624482486, 914581322
+	],
+	"manager": 391888555
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"name": "Shop It!",
+	"description": "Build a web app for online shopping.",
+	"employees": [
+		391888555, 363090781, 914581322, 244071247
+	],
+	"manager": 391888555
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"name": "Languru",
+	"description": "Build a web app for learning new languages.",
+	"employees": [
+		805377710, 363090781, 244071247, 693912036
+	],
+	"manager": 805377710
+}
+])
+
+db.employees.insertMany([
+{
+	"_id": ObjectId(),
+	"employee_ID": 391888555,
+	"name": "Rebeckah Baldwin",
+	"email": "rbaldwin@companyA.gmail.com",
+	"role": "project manager",
+	"skills": [
+		"frontend development", "backend development", "database engineer"
+	],
+	"projects": [
+		39, 57
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 805377710,
+	"name": "Dean Hatheway",
+	"email": "dhatheway@companyA.gmail.com",
+	"role": "project manager",
+	"skills": [
+		"backend development", "mobile app development", "database engineer"
+	],
+	"projects": [
+		67
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 363090781,
+	"name": "Pamelia Howard",
+	"email": "phoward@companyA.gmail.com",
+	"role": "business analyst",
+	"skills": [
+		"data visualization", "data analysis", "business knowledge"
+	],
+	"projects": [
+		39, 57, 67
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 624482486,
+	"name": "Jaqueline Ainsworth",
+	"email": "jainsworth@companyA.gmail.com",
+	"role": "software developer",
+	"skills": [
+		"backend development", "database engineer"
+	],
+	"projects": [
+		39
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 914581322,
+	"name": "Mervin Fletcher",
+	"email": "mfletcher@companyA.gmail.com",
+	"role": "software developer",
+	"skills": [
+		"frontend development", "backend development", "database engineer"
+	],
+	"projects": [
+		39, 57
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 244071247,
+	"name": "Aldous Cornell",
+	"email": "acornell@companyA.gmail.com",
+	"role": "software developer",
+	"skills": [
+		"mobile app development", "database engineer"
+	],
+	"projects": [
+		57, 67
+	]
+},
+{
+	"_id": ObjectId(),
+	"employee_ID": 693912036,
+	"name": "Regina Hyatt",
+	"email": "rhyatt@companyA.gmail.com",
+	"role": "software developer",
+	"skills": [
+		"AI engineering", "data science", "database engineer"
+	],
+	"projects": [
+		67
+	]
+}
+])
+
+db.tasks.insertMany([
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 624482486,
+	"title": "MongoDB + Flask setup",
+	"description": "Set up MongoDB connection and queries using Flask and PyMongo",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 914581322,
+	"title": "Implement user authentication",
+	"description": "Implement user auth using JWTs via the pyjwt Python library",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 914581322,
+	"title": "Implement encrypted password storage",
+	"description": "Implement encrypted password storage using the bcrypt Python library",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 624482486,
+	"title": "Integrate caching mechanism",
+	"description": "Integrate caching using Redis",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 624482486,
+	"title": "MongoDB Replication",
+	"description": "Integrate DB replication using MongoDB Replica Set",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 39,
+	"employee_ID": 624482486,
+	"title": "Test Flask queries",
+	"description": "Outline and test use cases for MongoDB + Flask routes",
+	"due_date": Date()
+},
+
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 914581322,
+	"title": "Plan Browser UI",
+	"description": "Brainstorm UI for Browser clients",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 914581322,
+	"title": "Plan Browser UX and navigation",
+	"description": "Brainstorm UX and navigation for Browser clients",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 914581322,
+	"title": "Plan Backend APIs",
+	"description": "Brainstorm architecture for API endpoints and usage",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 244071247,
+	"title": "Plan Mobile UI",
+	"description": "Brainstorm UI for Mobile clients",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 244071247,
+	"title": "Plan Mobile UX and navigation",
+	"description": "Brainstorm UX and navigation for Mobile clients",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 57,
+	"employee_ID": 244071247,
+	"title": "Plan Database Storage",
+	"description": "Brainstorm architecture for Database schemas, storage, and accessibility",
+	"due_date": Date()
+},
+
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 244071247,
+	"title": "Android UI and UX",
+	"description": "Brainstorm UI and UX for Android users. Research what development tools to use.",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 244071247,
+	"title": "iOS UI and UX",
+	"description": "Brainstorm UI and UX for iOS users. Research what development tools to use.",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 693912036,
+	"title": "Research Languages",
+	"description": "Conduct research for the most popular/in-demand languages to incorporate in the app.",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 693912036,
+	"title": "Research Language Training Models",
+	"description": "Conduct research for the most effective applications of AI/ML for learning languages.",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 693912036,
+	"title": "Plan Database Storage",
+	"description": "Brainstorm architecture for Database schemas, storage, and accessibility",
+	"due_date": Date()
+},
+{
+	"_id": ObjectId(),
+	"project_ID": 67,
+	"employee_ID": 693912036,
+	"title": "Plan Test Cases for Language Learning",
+	"description": "Plan test cases for evaluating the accuracy of different language models. Keep the mobile UI/UX in mind.",
+	"due_date": Date()
+}
+])
