@@ -4,6 +4,8 @@ from pymongo.server_api import ServerApi  # MongoDB Atlas connection
 from bson.objectid import ObjectId  # Creating/processing ObjectIDs
 import redis  # Redis cache
 import json  # Stringify JSONs for Redis cache
+from JWT import token_required # Import JWT Decorator from JWT.py
+# TODO: add decorator @token_required under each route
 
 # Replace this with your URI from MongoDB Atlas!
 uri = "insert_URI_here"
@@ -52,7 +54,7 @@ def get_employees():
 			emp_data['skills'] = json.loads(emp_data['skills'])
 			# save the document in list of employees
 			employees.append(emp_data)
-		
+
 		print("from the cache!")
 		return jsonify(employees), 200  # return all employees (from cache)
 
@@ -77,7 +79,7 @@ def get_employees():
 
 		# finally, save each employee document
 		employees.append(document)
-		
+
 	# return all employees
 	print("from the database!")
 	return jsonify(employees), 200  # return all employees (from MongoDB Atlas)
