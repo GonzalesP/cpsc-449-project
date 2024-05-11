@@ -44,9 +44,6 @@ db.employees.insertMany([
 	"role": "project manager",
 	"skills": [
 		"frontend development", "backend development", "database engineer"
-	],
-	"projects": [
-		39, 57
 	]
 },
 {
@@ -57,9 +54,6 @@ db.employees.insertMany([
 	"role": "project manager",
 	"skills": [
 		"backend development", "mobile app development", "database engineer"
-	],
-	"projects": [
-		67
 	]
 },
 {
@@ -70,9 +64,6 @@ db.employees.insertMany([
 	"role": "business analyst",
 	"skills": [
 		"data visualization", "data analysis", "business knowledge"
-	],
-	"projects": [
-		39, 57, 67
 	]
 },
 {
@@ -83,9 +74,6 @@ db.employees.insertMany([
 	"role": "software developer",
 	"skills": [
 		"backend development", "database engineer"
-	],
-	"projects": [
-		39
 	]
 },
 {
@@ -96,9 +84,6 @@ db.employees.insertMany([
 	"role": "software developer",
 	"skills": [
 		"frontend development", "backend development", "database engineer"
-	],
-	"projects": [
-		39, 57
 	]
 },
 {
@@ -109,9 +94,6 @@ db.employees.insertMany([
 	"role": "software developer",
 	"skills": [
 		"mobile app development", "database engineer"
-	],
-	"projects": [
-		57, 67
 	]
 },
 {
@@ -122,9 +104,6 @@ db.employees.insertMany([
 	"role": "software developer",
 	"skills": [
 		"AI engineering", "data science", "database engineer"
-	],
-	"projects": [
-		67
 	]
 }
 ])
