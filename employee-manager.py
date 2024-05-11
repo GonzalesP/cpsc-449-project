@@ -26,13 +26,13 @@ def check_dbs():
 
 
 
-# TODO: create new employee (POST)
+# create new employee
 @app.route('/v1/employee-manager/employees', methods=['POST'])
 def create_employee():
 	employee = request.json
-	# employee['_id'] = ObjectId()
-	print(employee)
-	return jsonify({'message': 'lol'}), 201
+	employee['_id'] = ObjectId()
+	employees_collection.insert_one(employee)
+	return jsonify({'message': 'employee created successfully'}), 201
 
 # get list of all employees
 @app.route('/v1/employee-manager/employees', methods=['GET'])
@@ -90,15 +90,28 @@ def get_employee(emp_id):
 		employee['_id'] = str(employee['_id'])
 		return jsonify(employee), 200
 	else:
-		return jsonify({'message': 'Employee not found'}), 404
+		return jsonify({'message': 'employee not found'}), 404
 
 # TODO: get employees with a certain skill (GET)
 
-# TODO: update an employee using their ID (PUT)
+# update an employee using their employee_ID
+@app.route('/v1/employee-manager/employees/<int:emp_id>', methods=['PUT'])
+def update_employee(emp_id):
+	updated_data = request.json
+	result = employees_collection.update_one({'employee_ID': emp_id}, {'$set': updated_data})
+	if result.matched_count:
+		return jsonify({'message': 'employee updated successfully'}), 200
+	else:
+		return jsonify({'message': 'employee not found'}), 404
 
-# TODO: delete an employee using their ID (DELETE)
-
-
+# delete an employee using their employee_ID
+@app.route('/v1/employee-manager/employees/<int:emp_id>', methods=['DELETE'])
+def delete_employee(emp_id):
+	result = employees_collection.delete_one({'employee_ID': emp_id})
+	if result.deleted_count:
+		return jsonify({'message': 'employee deleted successfully'}), 200
+	else:
+		return jsonify({'message': 'employee not found'}), 404
 
 if __name__ == '__main__':
 	app.run(debug=True, port=31002)
