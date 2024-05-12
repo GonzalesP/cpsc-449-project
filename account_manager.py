@@ -6,12 +6,12 @@ from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 from JWT import generate_token
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'your-secret-key'  # Change this!
+app.config['JWT_SECRET_KEY'] = 'cpsc-449-jwt-secret-key'
 jwt = JWTManager(app)
 
 bcrypt = Bcrypt(app)
 
-uri = ""
+uri = "mongodb+srv://tchaalan23:Tutuch2003-@cluster0.uo27hwg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['company-manager']
 accounts_collection = db['accounts']

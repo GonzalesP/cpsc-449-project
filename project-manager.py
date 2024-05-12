@@ -4,9 +4,10 @@ from pymongo.server_api import ServerApi  # MongoDB Atlas connection
 from bson.objectid import ObjectId  # Creating/processing ObjectIDs
 import redis  # Redis cache
 import json  # Stringify JSONs for Redis cache
+from JWT import token_required # Import JWT Decorator from JWT.py
 
 # Replace this with your URI from MongoDB Atlas!
-uri = "insert_URI_here"
+uri = "mongodb+srv://tchaalan23:Tutuch2003-@cluster0.uo27hwg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 app = Flask(__name__)
 
 # Connect to MongoDB
@@ -31,6 +32,7 @@ def check_dbs():
 
 # create new project
 @app.route('/v1/project-manager/projects', methods=['POST'])
+@token_required
 def create_project():
 	# First, save the project data in db.projects
 	# get new project info
@@ -55,6 +57,7 @@ def create_project():
 
 # get list of all projects
 @app.route('/v1/project-manager/projects', methods=['GET'])
+@token_required
 def get_projects():
 	# attempt to load all employee IDs from Redis cache
 	project_ids = redis_cache.smembers("project_ids")
@@ -73,7 +76,7 @@ def get_projects():
 			pro_data['manager'] = int(pro_data['manager'])
 			# save the document in list of employees
 			projects.append(pro_data)
-		
+
 		print("from the cache!")
 		return jsonify(projects), 200  # return all projects (from cache)
 
@@ -97,13 +100,14 @@ def get_projects():
 
 		# finally, save each project document
 		projects.append(document)
-	
+
 	# return all projects
 	print("from the database!")
 	return jsonify(projects), 200
 
 # get project by its project ID
 @app.route('/v1/project-manager/projects/<int:pro_id>', methods=['GET'])
+@token_required
 def get_project(pro_id):
 	# attempt to load the project from Redis cache
 	pro_data = redis_cache.hgetall(f'project:{pro_id}')
@@ -136,13 +140,14 @@ def get_project(pro_id):
 		# finally, return the project
 		print("from the database!")
 		return jsonify(project), 200
-	
+
 	# otherwise, if the project doesn't exist, return an error
 	else:
 		return jsonify({'message': 'Project not found'}), 404
 
 # update a project using its project_ID
 @app.route('/v1/project-manager/projects/<int:pro_id>', methods=['PUT'])
+@token_required
 def update_project(pro_id):
 	# get new project info
 	updated_data = request.json
@@ -154,13 +159,14 @@ def update_project(pro_id):
 		updated_data["employees"] = json.dumps(updated_data["employees"])
 		redis_cache.hset(f"project:{pro_id}", mapping=updated_data)
 		return jsonify({'message': 'project updated successfully'}), 200
-	
+
 	# otherwise, if it doesn't exist, return an error
 	else:
 		return jsonify({'message': 'project not found'}), 404
 
 # delete a project using its project_ID
 @app.route('/v1/project-manager/projects/<int:pro_id>', methods=['DELETE'])
+@token_required
 def delete_project(pro_id):
 	# try to delete a project with the given project_ID
 	result = projects_collection.delete_one({'project_ID': pro_id})
@@ -169,7 +175,7 @@ def delete_project(pro_id):
 		redis_cache.delete(f"project:{pro_id}")
 		redis_cache.srem("project_ids", pro_id)
 		return jsonify({'message': 'project deleted successfully'}), 200
-	
+
 	# if it doesn't exist, return an error
 	else:
 		return jsonify({'message': 'employee not found'}), 404
