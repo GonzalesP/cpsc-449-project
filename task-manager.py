@@ -4,9 +4,10 @@ from pymongo.server_api import ServerApi  # MongoDB Atlas connection
 from bson.objectid import ObjectId  # Creating/processing ObjectIDs
 import redis  # Redis cache
 import json  # Stringify JSONs for Redis cache
+from JWT import token_required # Import JWT Decorator from JWT.py
 
 # Replace this with your URI from MongoDB Atlas!
-uri = "insert_URI_here"
+uri = "enter-uri-here"
 app = Flask(__name__)
 
 # Connect to MongoDB
@@ -31,6 +32,7 @@ def check_dbs():
 
 # create new task
 @app.route('/v1/task-manager/tasks', methods=['POST'])
+@token_required
 def create_task():
 	# First, save the task data in db.tasks
 	# get new task info
@@ -52,6 +54,7 @@ def create_task():
 
 # get list of all tasks
 @app.route('/v1/task-manager/tasks', methods=['GET'])
+@token_required
 def get_tasks():
 	# attempt to load all task IDs from Redis cache
 	task_ids = redis_cache.smembers("task_ids")
@@ -69,7 +72,7 @@ def get_tasks():
 			task_data['employee_ID'] = int(task_data['employee_ID'])
 			# save the document in list of tasks
 			tasks.append(task_data)
-		
+
 		print("from the cache!")
 		return jsonify(tasks), 200  # return all tasks (from cache)
 
@@ -93,6 +96,7 @@ def get_tasks():
 
 # get list of tasks for a project (using project ID)
 @app.route('/v1/task-manager/projects/<int:pro_id>', methods=['GET'])  # TODO: add Redis
+@token_required
 def get_project_tasks(pro_id):
 	# get list of tasks
 	tasks = list(tasks_collection.find({'project_ID': pro_id}))
@@ -107,6 +111,7 @@ def get_project_tasks(pro_id):
 
 # get list of tasks for an employee (using employee ID)
 @app.route('/v1/task-manager/employees/<int:emp_id>', methods=['GET'])  # TODO: add Redis
+@token_required
 def get_employee_tasks(emp_id):
 	# get list of tasks
 	tasks = list(tasks_collection.find({'employee_ID': emp_id}))
@@ -121,6 +126,7 @@ def get_employee_tasks(emp_id):
 
 # update a task using its object ID
 @app.route('/v1/task-manager/tasks/<id>', methods=['PUT'])
+@token_required
 def update_task(id):
 	# get new task info
 	updated_data = request.json
@@ -131,13 +137,14 @@ def update_task(id):
 		# stringify the data (Redis friendly)
 		redis_cache.hset(f"task:{id}", mapping=updated_data)
 		return jsonify({'message': 'task updated successfully'}), 200
-	
+
 	# otherwise, if it doesn't exist, return an error
 	else:
 		return jsonify({'message': 'task not found'}), 404
 
 # delete a task using its object ID
 @app.route('/v1/task-manager/tasks/<id>', methods=['DELETE'])
+@token_required
 def delete_task(id):
 	# try to delete the task with the given object ID
 	result = tasks_collection.delete_one({'_id': ObjectId(id)})
@@ -146,11 +153,10 @@ def delete_task(id):
 		redis_cache.delete(f"task:{id}")
 		redis_cache.srem("task_ids", id)
 		return jsonify({'message': 'task deleted successfully'}), 200
-	
+
 	# if it doesn't exist, return an error
 	else:
 		return jsonify({'message': 'task not found'}), 404
-
 
 
 if __name__ == '__main__':
