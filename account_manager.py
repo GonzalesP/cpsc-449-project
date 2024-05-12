@@ -60,6 +60,7 @@ def get_user(username):
 
 
 @app.route('/v1/account-manager/users/<username>', methods=['PUT'])
+@jwt_required()
 def update_user(username):
     updated_data = request.json
     result = accounts_collection.update_one({'username': username}, {'$set': updated_data})

@@ -95,7 +95,7 @@ def get_tasks():
 	return jsonify(tasks), 200
 
 # get list of tasks for a project (using project ID)
-@app.route('/v1/task-manager/projects/<int:pro_id>', methods=['GET'])  # TODO: add Redis
+@app.route('/v1/task-manager/projects/<int:pro_id>', methods=['GET'])
 @token_required
 def get_project_tasks(pro_id):
 	# get list of tasks
@@ -110,7 +110,7 @@ def get_project_tasks(pro_id):
 		return jsonify({'message': 'project not found'}), 404
 
 # get list of tasks for an employee (using employee ID)
-@app.route('/v1/task-manager/employees/<int:emp_id>', methods=['GET'])  # TODO: add Redis
+@app.route('/v1/task-manager/employees/<int:emp_id>', methods=['GET'])
 @token_required
 def get_employee_tasks(emp_id):
 	# get list of tasks
