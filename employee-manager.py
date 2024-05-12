@@ -5,10 +5,9 @@ from bson.objectid import ObjectId  # Creating/processing ObjectIDs
 import redis  # Redis cache
 import json  # Stringify JSONs for Redis cache
 from JWT import token_required # Import JWT Decorator from JWT.py
-# TODO: add decorator @token_required under each route
 
 # Replace this with your URI from MongoDB Atlas!
-uri = "insert_URI_here"
+uri = "enter-uri-here"
 app = Flask(__name__)
 
 # Connect to MongoDB
@@ -33,6 +32,7 @@ def check_dbs():
 
 # create new employee
 @app.route('/v1/employee-manager/employees', methods=['POST'])
+@token_required
 def create_employee():
 	# First, save the employee data in db.employees
 	# get new employee info
@@ -57,6 +57,7 @@ def create_employee():
 
 # get list of all employees
 @app.route('/v1/employee-manager/employees', methods=['GET'])
+@token_required
 def get_employees():
 	# attempt to load all employee IDs from Redis cache
 	employee_ids = redis_cache.smembers("employee_ids")
@@ -105,6 +106,7 @@ def get_employees():
 
 # get an employee by their employee ID
 @app.route('/v1/employee-manager/employees/<int:emp_id>', methods=['GET'])
+@token_required
 def get_employee(emp_id):
 	# attempt to load the employee from Redis cache
 	emp_data = redis_cache.hgetall(f'employee:{emp_id}')
@@ -138,13 +140,14 @@ def get_employee(emp_id):
 		# finally, return the employee
 		print("from the database!")
 		return jsonify(employee), 200
-	
+
 	# otherwise, if the employee doesn't exist, return an error
 	else:
 		return jsonify({'message': 'employee not found'}), 404
 
 # update an employee using their employee_ID
 @app.route('/v1/employee-manager/employees/<int:emp_id>', methods=['PUT'])
+@token_required
 def update_employee(emp_id):
 	# get new employee info
 	updated_data = request.json
@@ -156,13 +159,14 @@ def update_employee(emp_id):
 		updated_data["skills"] = json.dumps(updated_data["skills"])
 		redis_cache.hset(f"employee:{emp_id}", mapping=updated_data)
 		return jsonify({'message': 'employee updated successfully'}), 200
-	
+
 	# otherwise, if they don't exist, return an error
 	else:
 		return jsonify({'message': 'employee not found'}), 404
 
 # delete an employee using their employee_ID
 @app.route('/v1/employee-manager/employees/<int:emp_id>', methods=['DELETE'])
+@token_required
 def delete_employee(emp_id):
 	# try to delete an employee with the given employee_ID
 	result = employees_collection.delete_one({'employee_ID': emp_id})
@@ -171,7 +175,7 @@ def delete_employee(emp_id):
 		redis_cache.delete(f"employee:{emp_id}")
 		redis_cache.srem("employee_ids", emp_id)
 		return jsonify({'message': 'employee deleted successfully'}), 200
-	
+
 	# if they don't exist, return an error
 	else:
 		return jsonify({'message': 'employee not found'}), 404
