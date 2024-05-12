@@ -53,29 +53,29 @@ db.collection.insertMany([
 
 ## Finally, open a client (e.g. Postman) to use the APIs
 1. account-manager runs on port 31001
-    - **POST** `http://127.0.0.1:31001/v1/account-manager/signup`
-    - **POST** `http://127.0.0.1:31001/v1/account-manager/login`
-    - **GET** `http://127.0.0.1:31001/v1/account-manager/users/<username>`
-    - **PUT** `http://127.0.0.1:31001/v1/account-manager/users/<username>`
+    - ![POST](https://placehold.co/15x15/ffe460/ffe460.png) **POST** `http://127.0.0.1:31001/v1/account-manager/signup`
+    - ![POST](https://placehold.co/15x15/ffe460/ffe460.png) **POST** `http://127.0.0.1:31001/v1/account-manager/login`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31001/v1/account-manager/users/<username>`
+    - ![PUT](https://placehold.co/15x15/648ebf/648ebf.png) **PUT** `http://127.0.0.1:31001/v1/account-manager/users/<username>`
 2. employee-manager runs on port 31002
-    - **POST** `http://127.0.0.1:31002/v1/employee-manager/employees`
-    - **GET** `http://127.0.0.1:31002/v1/employee-manager/employees`
-    - **GET** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
-    - **PUT** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
-    - **DELETE** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
+    - ![POST](https://placehold.co/15x15/ffe460/ffe460.png) **POST** `http://127.0.0.1:31002/v1/employee-manager/employees`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31002/v1/employee-manager/employees`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
+    - ![PUT](https://placehold.co/15x15/648ebf/648ebf.png) **PUT** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
+    - ![DELETE](https://placehold.co/15x15/d22b2b/d22b2b.png) **DELETE** `http://127.0.0.1:31002/v1/employee-manager/employees/<int:emp_id>`
 3. project-manager runs on port 31003
-    - **POST** `http://127.0.0.1:31003/v1/project-manager/projects`
-    - **GET** `http://127.0.0.1:31003/v1/project-manager/projects`
-    - **GET** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
-    - **PUT** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
-    - **DELETE** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
+    - ![POST](https://placehold.co/15x15/ffe460/ffe460.png) **POST** `http://127.0.0.1:31003/v1/project-manager/projects`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31003/v1/project-manager/projects`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
+    - ![PUT](https://placehold.co/15x15/648ebf/648ebf.png) **PUT** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
+    - ![DELETE](https://placehold.co/15x15/d22b2b/d22b2b.png) **DELETE** `http://127.0.0.1:31003/v1/project-manager/projects/<int:pro_id>`
 4. task-manager runs on port 31004
-    - **POST** `http://127.0.0.1:31004/v1/task-manager/tasks`
-    - **GET** `http://127.0.0.1:31004/v1/task-manager/tasks`
-    - **GET** `http://127.0.0.1:31004/v1/task-manager/projects/<int:pro_id>`
-    - **GET** `http://127.0.0.1:31004/v1/task-manager/employees/<int:emp_id>`
-    - **PUT** `http://127.0.0.1:31004/v1/task-manager/tasks/<id>`
-    - **DELETE** `http://127.0.0.1:31004/v1/task-manager/tasks/<id>`
+    - ![POST](https://placehold.co/15x15/ffe460/ffe460.png) **POST** `http://127.0.0.1:31004/v1/task-manager/tasks`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31004/v1/task-manager/tasks`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31004/v1/task-manager/projects/<int:pro_id>`
+    - ![GET](https://placehold.co/15x15/68dd9a/68dd9a.png) **GET** `http://127.0.0.1:31004/v1/task-manager/employees/<int:emp_id>`
+    - ![PUT](https://placehold.co/15x15/648ebf/648ebf.png) **PUT** `http://127.0.0.1:31004/v1/task-manager/tasks/<id>`
+    - ![DELETE](https://placehold.co/15x15/d22b2b/d22b2b.png) **DELETE** `http://127.0.0.1:31004/v1/task-manager/tasks/<id>`
 5. note: 
     - For POST and PUT operations, you will need a raw JSON body
     - For Authentication, you need to navigate to the `Headers` tab and input `Key= Authorization` and `Value= Bearer <token-here>`
