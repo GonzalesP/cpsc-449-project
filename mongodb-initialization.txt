@@ -156,8 +156,10 @@ db.tasks.insertMany([
 	"title": "Test Flask queries",
 	"description": "Outline and test use cases for MongoDB + Flask routes",
 	"due_date": Date()
-},
+}
+])
 
+db.tasks.insertMany([
 {
 	"_id": ObjectId(),
 	"project_ID": 57,
@@ -205,8 +207,10 @@ db.tasks.insertMany([
 	"title": "Plan Database Storage",
 	"description": "Brainstorm architecture for Database schemas, storage, and accessibility",
 	"due_date": Date()
-},
+}
+])
 
+db.tasks.insertMany([
 {
 	"_id": ObjectId(),
 	"project_ID": 67,
